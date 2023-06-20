@@ -1,0 +1,220 @@
+* {
+    box-sizing: border-box;
+    color: white;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(https://d1tfdfyb9rvaxg.cloudfront.net/chedilusticabay.dev.cendynecommerce.com-1513444507/cms/cache/v2/647de1f784b5b.jpg/1920x1080/fit/80/5684cf3b03098331cc4d873d84385dd0.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* backdrop-filter: blur(5px); */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h1 {
+    font-size: 1rem;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: normal;
+
+}
+
+.container {
+    box-sizing: border-box;
+    height: 80vh;
+    width: 50rem;
+
+    display: grid;
+    place-items: center;
+    grid-template-columns: 30rem 30rem;
+    grid-auto-rows: minmax(8rem, auto);
+    justify-content: center;
+
+    border-radius: 40px;
+    background-color: rgb(209, 202, 202, .8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.container * {
+    opacity: 1;
+}
+
+.textHeadline {
+    grid-column: span 2;
+
+}
+
+.currentGameStatus {
+    font-size: 2.2rem;
+    width: auto;
+    height: 2.5rem;
+    text-align: center;
+    grid-column: span 2;
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
+
+}
+
+
+.playerStatus {
+    width: auto;
+    height: auto;
+    /* background-color: #416978; */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.compBoardContainer {
+    width: auto;
+    height: auto;
+    /* background-color: #17aa30; */
+    grid-column: span 1;
+
+    display: grid;
+    place-items: center;
+}
+
+.compBoard {
+    width: 30vh;
+    height: 20vh;
+    background-color: #79ba64;
+}
+
+.userBoardContainer {
+    width: auto;
+    height: auto;
+    /* background-color: #3d1648; */
+    grid-column: span 1;
+
+    display: grid;
+    place-items: center;
+}
+
+.userBoard {
+    width: 30vh;
+    height: 20vh;
+    background-color: #8e838d;
+}
+
+.bottomBoard {
+    width: 40%;
+    height: 80%;
+    background-color: #89273c;
+
+    grid-column: span 2;
+    text-align: center;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 40px;
+
+}
+
+.inputContainer {
+    margin-top: 20px;
+    overflow: hidden;
+    width: 80%;
+}
+
+/* Guess Text */
+.userInput {
+    width: auto;
+    height: auto;
+    color: white;
+    font-size: 20px;
+
+    display: inline;
+
+    padding: 4px;
+    margin: 0px -5px 0px 0px;
+
+    /* Borders & colors*/
+    background-color: rgb(188, 64, 64);
+    border: 4px solid rgb(188, 64, 64);
+    border-radius: 20px 0px 0px 20px;
+}
+
+/* Input Box */
+.inputAttack {
+    width: 4rem;
+    height: 1.9rem;
+    display: inline;
+    color: black;
+    margin: 0px 7.5px 0px 0px;
+    border-radius: 0px 20px 20px 0px;
+    border: 2px solid rgb(188, 64, 64);
+    /* */
+}
+
+.fireBtn {
+    width: 4rem;
+    height: 1.7rem;
+    background-color: #2298dd;
+    border: none;
+    border-radius: 25px;
+    display: inline;
+    text-align: center;
+    margin: 0px 0px 0px 7.5px;
+
+}
+
+.fireBtn:hover {
+    background-color: rgb(255, 255, 255);
+    border: #2298dd 2px solid;
+    color: black;
+}
+
+.restartBtn {
+    width: 5rem;
+    height: 2rem;
+    background-color: #36da9e;
+    border: none;
+    border-radius: 30px;
+}
+
+.restartBtn:hover {
+    border: 2px solid #36da9e;
+    background-color: white;
+    color: black;
+
+
+}
+
+.cells {
+    /* display: none; */
+    width: .5rem;
+    height: .5rem;
+
+}
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: blue;
+}

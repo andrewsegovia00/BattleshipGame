@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew's Battleship</title>
+    <link rel="stylesheet" href="main.css" />
+    <script defer src="main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="textHeadline">
+            <h1 class="currentGameStatus">Battleship</h1>
+            <h1 class="currentGameStatus" id="messageBoard">Opponent hit your ship!</h1>
+        </div>
+        <div class="compBoardContainer">
+            <h2 class="playerStatus">Opponent</h2>
+            <table class="compBoard" id="compBoard">
+
+                <tr>
+                    <td class="cells" id="A0"></td>
+                    <td class="cells" id="A1"></td>
+                    <td class="cells" id="A2"></td>
+                    <td class="cells" id="A3"></td>
+                    <td class="cells" id="A4"></td>
+                    <td class="cells" id="A5"></td>
+                    <td class="cells" id="A6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="B0"></td>
+                    <td class="cells" id="B1"></td>
+                    <td class="cells" id="B2"></td>
+                    <td class="cells" id="B3"></td>
+                    <td class="cells" id="B4"></td>
+                    <td class="cells" id="B5"></td>
+                    <td class="cells" id="B6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="C0"></td>
+                    <td class="cells" id="C1"></td>
+                    <td class="cells" id="C2"></td>
+                    <td class="cells" id="C3"></td>
+                    <td class="cells" id="C4"></td>
+                    <td class="cells" id="C5"></td>
+                    <td class="cells" id="C6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="D0"></td>
+                    <td class="cells" id="D1"></td>
+                    <td class="cells" id="D2"></td>
+                    <td class="cells" id="D3"></td>
+                    <td class="cells" id="D4"></td>
+                    <td class="cells" id="D5"></td>
+                    <td class="cells" id="D6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="E0"></td>
+                    <td class="cells" id="E1"></td>
+                    <td class="cells" id="E2"></td>
+                    <td class="cells" id="E3"></td>
+                    <td class="cells" id="E4"></td>
+                    <td class="cells" id="E5"></td>
+                    <td class="cells" id="E6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="F0"></td>
+                    <td class="cells" id="F1"></td>
+                    <td class="cells" id="F2"></td>
+                    <td class="cells" id="F3"></td>
+                    <td class="cells" id="F4"></td>
+                    <td class="cells" id="F5"></td>
+                    <td class="cells" id="F6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="G0"></td>
+                    <td class="cells" id="G1"></td>
+                    <td class="cells" id="G2"></td>
+                    <td class="cells" id="G3"></td>
+                    <td class="cells" id="G4"></td>
+                    <td class="cells" id="G5"></td>
+                    <td class="cells" id="G6"></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="userBoardContainer">
+            <h2 class="playerStatus">Player 1</h2>
+            <table class="userBoard" id="userBoard">
+
+                <tr>
+                    <td class="cells" id="A0"></td>
+                    <td class="cells" id="A1"></td>
+                    <td class="cells" id="A2"></td>
+                    <td class="cells" id="A3"></td>
+                    <td class="cells" id="A4"></td>
+                    <td class="cells" id="A5"></td>
+                    <td class="cells" id="A6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="B0"></td>
+                    <td class="cells" id="B1"></td>
+                    <td class="cells" id="B2"></td>
+                    <td class="cells" id="B3"></td>
+                    <td class="cells" id="B4"></td>
+                    <td class="cells" id="B5"></td>
+                    <td class="cells" id="B6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="C0"></td>
+                    <td class="cells" id="C1"></td>
+                    <td class="cells" id="C2"></td>
+                    <td class="cells" id="C3"></td>
+                    <td class="cells" id="C4"></td>
+                    <td class="cells" id="C5"></td>
+                    <td class="cells" id="C6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="D0"></td>
+                    <td class="cells" id="D1"></td>
+                    <td class="cells" id="D2"></td>
+                    <td class="cells" id="D3"></td>
+                    <td class="cells" id="D4"></td>
+                    <td class="cells" id="D5"></td>
+                    <td class="cells" id="D6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="E0"></td>
+                    <td class="cells" id="E1"></td>
+                    <td class="cells" id="E2"></td>
+                    <td class="cells" id="E3"></td>
+                    <td class="cells" id="E4"></td>
+                    <td class="cells" id="E5"></td>
+                    <td class="cells" id="E6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="F0"></td>
+                    <td class="cells" id="F1"></td>
+                    <td class="cells" id="F2"></td>
+                    <td class="cells" id="F3"></td>
+                    <td class="cells" id="F4"></td>
+                    <td class="cells" id="F5"></td>
+                    <td class="cells" id="F6"></td>
+                </tr>
+
+                <tr>
+                    <td class="cells" id="G0"></td>
+                    <td class="cells" id="G1"></td>
+                    <td class="cells" id="G2"></td>
+                    <td class="cells" id="G3"></td>
+                    <td class="cells" id="G4"></td>
+                    <td class="cells" id="G5"></td>
+                    <td class="cells" id="G6"></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="bottomBoard">
+            <div class="inputContainer">
+                <p class="userInput">Write your Guess</p>
+                <input type="text" class="inputAttack" placeholder="A1" id="guessInput" />
+                <button class="fireBtn" id="fireBtn">FIRE!</button>
+            </div>
+            <button class="restartBtn">RESTART</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
