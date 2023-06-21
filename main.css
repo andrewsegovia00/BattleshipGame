@@ -8,21 +8,19 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Lora', serif;
-    font-family: 'Pirata One', cursive;
+    font-family: 'Press Start 2P', cursive;
 
 }
 
 button {
-    font-family: 'Lora', serif;
-    font-family: 'Pirata One', cursive;
+    font-family: 'Press Start 2P', cursive;
     font-weight: lighter;
 }
 
 table {
     border-collapse: collapse;
     width: 100%;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRxMLuz3tKxtCcl5WNkA8hyAb6m_L_0SZZmSSmCMU6g&usqp=CAU&ec=48600112");
+    background-image: url("https://i.pinimg.com/originals/e7/b1/91/e7b19173773a88ce5744bd8e43e615b9.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -34,14 +32,8 @@ td {
     text-align: left;
 }
 
-th {
-    background-color: #f2f2f2;
-    /* Add background color to table headers if desired */
-}
-
-
 body {
-    background-image: url(https://d1tfdfyb9rvaxg.cloudfront.net/chedilusticabay.dev.cendynecommerce.com-1513444507/cms/cache/v2/647de1f784b5b.jpg/1920x1080/fit/80/5684cf3b03098331cc4d873d84385dd0.jpg);
+    background-image: url("https://i.pinimg.com/originals/d0/e0/e2/d0e0e259bf0aba4da742bedff1d4b8a5.gif");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -83,7 +75,7 @@ h2 {
     justify-content: center;
 
     border-radius: 40px;
-    background-color: rgb(209, 202, 202, .8);
+    background-color: #0c1e45;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
 
 }
@@ -98,7 +90,7 @@ h2 {
 }
 
 .currentGameStatus {
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     width: auto;
     height: 2.5rem;
     text-align: center;
@@ -246,7 +238,7 @@ h2 {
 }
 
 .hit {
-    background-image: url("hit3.png");
+    background-image: url("hit.png");
     background-repeat: no-repeat;
     background-size: contain;
 }
