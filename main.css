@@ -8,7 +8,37 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Lora', serif;
+    font-family: 'Pirata One', cursive;
+
 }
+
+button {
+    font-family: 'Lora', serif;
+    font-family: 'Pirata One', cursive;
+    font-weight: lighter;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRxMLuz3tKxtCcl5WNkA8hyAb6m_L_0SZZmSSmCMU6g&usqp=CAU&ec=48600112");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+th,
+td {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    /* Add background color to table headers if desired */
+}
+
 
 body {
     background-image: url(https://d1tfdfyb9rvaxg.cloudfront.net/chedilusticabay.dev.cendynecommerce.com-1513444507/cms/cache/v2/647de1f784b5b.jpg/1920x1080/fit/80/5684cf3b03098331cc4d873d84385dd0.jpg);
@@ -82,7 +112,6 @@ h2 {
 .playerStatus {
     width: auto;
     height: auto;
-    /* background-color: #416978; */
     text-align: center;
     margin-bottom: 10px;
 }
@@ -90,7 +119,6 @@ h2 {
 .compBoardContainer {
     width: auto;
     height: auto;
-    /* background-color: #17aa30; */
     grid-column: span 1;
 
     display: grid;
@@ -106,7 +134,6 @@ h2 {
 .userBoardContainer {
     width: auto;
     height: auto;
-    /* background-color: #3d1648; */
     grid-column: span 1;
 
     display: grid;
@@ -171,21 +198,30 @@ h2 {
 }
 
 .fireBtn {
+    margin: 0px 0px 0px 7.5px;
     width: 4rem;
     height: 1.7rem;
-    background-color: #2298dd;
+
+    background-color: #c02e05;
+    color: rgb(241, 248, 30);
     border: none;
     border-radius: 25px;
+
     display: inline;
     text-align: center;
-    margin: 0px 0px 0px 7.5px;
-
 }
 
+.fireBtn:focus {
+    background-color: black;
+    border: red 2px solid;
+    color: red;
+}
+
+
 .fireBtn:hover {
-    background-color: rgb(255, 255, 255);
-    border: #2298dd 2px solid;
-    color: black;
+    background-color: black;
+    border: red 2px solid;
+    color: red;
 }
 
 .restartBtn {
@@ -205,16 +241,19 @@ h2 {
 }
 
 .cells {
-    /* display: none; */
     width: .5rem;
     height: .5rem;
-
 }
 
 .hit {
-    background-color: red;
+    background-image: url("hit3.png");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .miss {
-    background-color: blue;
+    background-image: url("missed.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* backdrop-filter: blur(1px); */
 }
