@@ -1,6 +1,6 @@
 // CONST
 const BOARDSIZE = 7;
-const letterBoard = [`A`, `B`, `C`, `D`, `E`, `F`, `G`];
+const LETTERBOARD = [`A`, `B`, `C`, `D`, `E`, `F`, `G`];
 
 /*----- app's state (variables) -----*/
 let winner = null;
@@ -41,11 +41,11 @@ class Ships {
         {
             if(side === 1)
             {
-                tempShipLocal.push(letterBoard[xAxis] + (yAxis + i));
+                tempShipLocal.push(LETTERBOARD[xAxis] + (yAxis + i));
             }
             else
             {
-                tempShipLocal.push(letterBoard[xAxis + i] + yAxis);
+                tempShipLocal.push(LETTERBOARD[xAxis + i] + yAxis);
             }
         }
         this.shipLocation = tempShipLocal;
@@ -159,6 +159,7 @@ const fireBtn = document.getElementById(`fireBtn`);
 const message = document.getElementById(`messageBoard`);
 const compBoard = document.getElementById(`compBoard`);
 const userBoard = document.getElementById(`userBoard`);
+const guessInput = document.getElementById(`guessInput`);
 
 /*----- event listeners -----*/
 fireBtn.addEventListener(`click`, handleFireBtn);
@@ -192,7 +193,11 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
         thirdShip.handleFiring(guess);
         if(isHit && firstShip.sunk && secondShip.sunk && thirdShip.sunk)
         {
+            fireBtn.disabled = true;
+            fireBtn.removeEventListener(`click`, handleFireBtn);
+            guessInput.disabled = true; 
             winner = winner; //Temp, revisit later
+            turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
         }
         else if(isHit)
         {
@@ -205,7 +210,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
 }
 
 function computerGuess() {
-    let xAxis = letterBoard[Math.floor(Math.random() * 7)]
+    let xAxis = LETTERBOARD[Math.floor(Math.random() * 7)]
     let yAxis = Math.floor(Math.random() * 7)
     let guessValue = xAxis + `` + yAxis;
     console.log(`computer guess: ${guessValue}`)
@@ -213,27 +218,32 @@ function computerGuess() {
 }
 
 function handleFireBtn() {
-    const guessInput = document.getElementById(`guessInput`);
+    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
+    {
+        return;
+    }
+    fireBtn.disabled = true;
+    fireBtn.removeEventListener(`click`, handleFireBtn);
+    let compGuess = computerGuess();
     const guessValue = guessInput.value;
+
     handleGuess(guessValue, firstShip, secondShip, thirdShip);
-    console.log(turn)
+    turn *= -1;
+    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk)
+    {
+        return;
+    }
+
     setTimeout( () => {
-        turn *= -1;
-        console.log(turn);
-        let compGuess = computerGuess();
-        console.log(turn);
         handleGuess(compGuess, computerFirstShip, computerSecondShip, computerThirdShip);
         turn *= -1;
+        fireBtn.disabled = false;
+        fireBtn.addEventListener(`click`, handleFireBtn);
     }, 3000);
-    console.log(turn);
 }
 
 function renderMessage(text){
-    if(text == 1)
-    {
-        message.innerText = `You've already selected this`;
-    }
-    else if( text === ``)
+    if( text === ``)
     {
         message.innerText = ``;
     }
@@ -248,12 +258,10 @@ function renderCompBoard(guess, missOrHit) {
 
     if(missOrHit === `success`)
     {
-        // cellChange.classList.remove();
         cellChange.classList.add(`hit`);
     }
     else
     {
-        // cellChange.classList.remove();
         cellChange.classList.add(`miss`);
     }
 }
