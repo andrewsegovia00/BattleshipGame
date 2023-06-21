@@ -53,14 +53,14 @@ class Ships {
 
     handleFiring(guess) {
         let index = this.shipLocation.indexOf(guess);
-        console.log(index);
+        console.log(`Here's the index ${index}`);
         if(this.succesfulHits[index] === `success`)
         {
             console.log(this.succesfulHits[index]);
             turn === 1 ? renderMessage(`Player 1: You've already selected this spot`) : renderMessage(`Comp: You've already selected this spot`);
             return true;
         }
-        else if (index === -1) 
+        else if (index >= 0) 
         {
             this.succesfulHits[index] = `success`;
             if(this.shipSunk()) 
@@ -70,11 +70,11 @@ class Ships {
             }
             turn === 1 ? renderMessage(`Nice Player 1! You've hit a ship at ${guess}`) : renderMessage(`Computer has hit a ship at ${guess}`);
             return true;
-            } 
-            else
-            {   
-                turn === 1 ? renderMessage(`Player 1 your shot at ${guess} was a miss`) : renderMessage(`Computer has missed a shot at ${guess}`)
-            }
+        } 
+        else
+        {   
+            turn === 1 ? renderMessage(`Player 1 your shot at ${guess} was a miss`) : renderMessage(`Computer has missed a shot at ${guess}`)
+        }
         return false;
     }
 
