@@ -228,8 +228,6 @@ h2 {
     border: 2px solid #36da9e;
     background-color: white;
     color: black;
-
-
 }
 
 .cells {
@@ -241,6 +239,7 @@ h2 {
     background-image: url("./images/hit.png");
     background-repeat: no-repeat;
     background-size: contain;
+    /* background-size: contain; */
 }
 
 .miss {
