@@ -14,6 +14,11 @@ body {
 
 button {
     font-family: 'Press Start 2P', cursive;
+    /* font-weight: lighter; */
+}
+
+input {
+    font-family: 'Press Start 2P', cursive;
     font-weight: lighter;
 }
 
@@ -37,7 +42,6 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    /* backdrop-filter: blur(5px); */
 
     display: flex;
     align-items: center;
@@ -65,17 +69,18 @@ h2 {
 
 .container {
     box-sizing: border-box;
-    height: 80vh;
+    height: 85vh;
     width: 50rem;
 
     display: grid;
     place-items: center;
-    grid-template-columns: 30rem 30rem;
+    grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(8rem, auto);
     justify-content: center;
 
     border-radius: 40px;
-    background-color: #0c1e45;
+    /* background-color: #0c1e45; */
+    background-color: rgb(12, 30, 69, .8);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
 
 }
@@ -90,7 +95,7 @@ h2 {
 }
 
 .currentGameStatus {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     width: auto;
     height: 2.5rem;
     text-align: center;
@@ -106,6 +111,7 @@ h2 {
     height: auto;
     text-align: center;
     margin-bottom: 10px;
+    font-size: 1rem;
 }
 
 .compBoardContainer {
@@ -139,9 +145,9 @@ h2 {
 }
 
 .bottomBoard {
-    width: 40%;
-    height: 80%;
-    background-color: #89273c;
+    width: 60%;
+    height: 90%;
+    /* background-color: #89273c; */
 
     grid-column: span 2;
     text-align: center;
@@ -156,22 +162,23 @@ h2 {
 .inputContainer {
     margin-top: 20px;
     overflow: hidden;
-    width: 80%;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
 }
 
 /* Guess Text */
 .userInput {
-    width: auto;
-    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
-    font-size: 20px;
-
-    display: inline;
+    font-size: .6rem;
 
     padding: 4px;
-    margin: 0px -5px 0px 0px;
+    margin: 0px 0px 0px 0px;
 
-    /* Borders & colors*/
     background-color: rgb(188, 64, 64);
     border: 4px solid rgb(188, 64, 64);
     border-radius: 20px 0px 0px 20px;
@@ -179,27 +186,26 @@ h2 {
 
 /* Input Box */
 .inputAttack {
-    width: 4rem;
-    height: 1.9rem;
-    display: inline;
+    width: 3.5rem;
+    height: 2rem;
+
     color: black;
     margin: 0px 7.5px 0px 0px;
     border-radius: 0px 20px 20px 0px;
     border: 2px solid rgb(188, 64, 64);
-    /* */
+    font-size: .7rem;
+    padding-left: .6rem;
 }
 
 .fireBtn {
     margin: 0px 0px 0px 7.5px;
-    width: 4rem;
-    height: 1.7rem;
+    width: 5rem;
+    height: 2rem;
 
     background-color: #c02e05;
     color: rgb(241, 248, 30);
     border: none;
     border-radius: 25px;
-
-    display: inline;
     text-align: center;
 }
 
@@ -217,7 +223,7 @@ h2 {
 }
 
 .restartBtn {
-    width: 5rem;
+    width: 7rem;
     height: 2rem;
     background-color: #36da9e;
     border: none;
