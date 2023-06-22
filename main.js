@@ -163,6 +163,9 @@ const guessInput = document.getElementById(`guessInput`);
 
 /*----- event listeners -----*/
 fireBtn.addEventListener(`click`, handleFireBtn);
+userBoard.addEventListener(`click`, handleCellClick);
+
+
 
 
 /*----- functions -----*/
@@ -238,7 +241,34 @@ function handleFireBtn() {
         turn *= -1;
         fireBtn.disabled = false;
         fireBtn.addEventListener(`click`, handleFireBtn);
-    }, 3000);
+    }, 2500);
+}
+
+function handleCellClick(event) {
+    const target = event.target;
+    const guessValue = target.id;
+
+    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
+    {
+        return;
+    }
+    userBoard.disabled = true;
+    userBoard.removeEventListener(`click`, handleCellClick);
+    let compGuess = computerGuess();
+
+    handleGuess(guessValue, firstShip, secondShip, thirdShip);
+    turn *= -1;
+    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk)
+    {
+        return;
+    }
+
+    setTimeout( () => {
+        handleGuess(compGuess, computerFirstShip, computerSecondShip, computerThirdShip);
+        turn *= -1;
+        userBoard.disabled = false;
+        userBoard.addEventListener(`click`, handleCellClick);
+    }, 2500);
 }
 
 function renderMessage(text){
