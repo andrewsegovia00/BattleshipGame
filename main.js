@@ -163,10 +163,12 @@ const guessInput = document.getElementById(`guessInput`);
 
 /*----- event listeners -----*/
 fireBtn.addEventListener(`click`, handleFireBtn);
+userBoard.addEventListener(`click`, handleCellClick);
+
+
 
 
 /*----- functions -----*/
-
 function init() {
     console.log("started initializing ships")
     firstShip = new Ships;
@@ -196,7 +198,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
             fireBtn.disabled = true;
             fireBtn.removeEventListener(`click`, handleFireBtn);
             guessInput.disabled = true; 
-            winner = winner; //Temp, revisit later
+            winner = winner;
             turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
         }
         else if(isHit)
@@ -239,7 +241,34 @@ function handleFireBtn() {
         turn *= -1;
         fireBtn.disabled = false;
         fireBtn.addEventListener(`click`, handleFireBtn);
-    }, 3000);
+    }, 2500);
+}
+
+function handleCellClick(event) {
+    const target = event.target;
+    const guessValue = target.id;
+
+    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
+    {
+        return;
+    }
+    userBoard.disabled = true;
+    userBoard.removeEventListener(`click`, handleCellClick);
+    let compGuess = computerGuess();
+
+    handleGuess(guessValue, firstShip, secondShip, thirdShip);
+    turn *= -1;
+    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk)
+    {
+        return;
+    }
+
+    setTimeout( () => {
+        handleGuess(compGuess, computerFirstShip, computerSecondShip, computerThirdShip);
+        turn *= -1;
+        userBoard.disabled = false;
+        userBoard.addEventListener(`click`, handleCellClick);
+    }, 2500);
 }
 
 function renderMessage(text){
@@ -271,13 +300,11 @@ function renderUserBoard(guess, missOrHit) {
     if(missOrHit === `success`)
     {
         console.log(missOrHit, guess)
-        // cellChange.classList.remove();
         cellChange.classList.add(`hit`);
     }
     else
     {
         console.log(missOrHit, guess)
-        // cellChange.classList.remove();
         cellChange.classList.add(`miss`);
     }
 }
