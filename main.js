@@ -166,7 +166,6 @@ fireBtn.addEventListener(`click`, handleFireBtn);
 
 
 /*----- functions -----*/
-
 function init() {
     console.log("started initializing ships")
     firstShip = new Ships;
@@ -196,7 +195,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
             fireBtn.disabled = true;
             fireBtn.removeEventListener(`click`, handleFireBtn);
             guessInput.disabled = true; 
-            winner = winner; //Temp, revisit later
+            winner = winner;
             turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
         }
         else if(isHit)
@@ -271,13 +270,11 @@ function renderUserBoard(guess, missOrHit) {
     if(missOrHit === `success`)
     {
         console.log(missOrHit, guess)
-        // cellChange.classList.remove();
         cellChange.classList.add(`hit`);
     }
     else
     {
         console.log(missOrHit, guess)
-        // cellChange.classList.remove();
         cellChange.classList.add(`miss`);
     }
 }

@@ -14,7 +14,6 @@ body {
 
 button {
     font-family: 'Press Start 2P', cursive;
-    /* font-weight: lighter; */
 }
 
 input {
@@ -79,7 +78,6 @@ h2 {
     justify-content: center;
 
     border-radius: 40px;
-    /* background-color: #0c1e45; */
     background-color: rgb(12, 30, 69, .8);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -95,7 +93,7 @@ h2 {
 }
 
 .currentGameStatus {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     width: auto;
     height: 2.5rem;
     text-align: center;
@@ -147,7 +145,6 @@ h2 {
 .bottomBoard {
     width: 60%;
     height: 90%;
-    /* background-color: #89273c; */
 
     grid-column: span 2;
     text-align: center;
@@ -168,7 +165,6 @@ h2 {
     justify-content: center;
 }
 
-/* Guess Text */
 .userInput {
     display: flex;
     align-items: center;
@@ -245,12 +241,10 @@ h2 {
     background-image: url("./images/hit.png");
     background-repeat: no-repeat;
     background-size: contain;
-    /* background-size: contain; */
 }
 
 .miss {
     background-image: url("./images/missed.png");
     background-repeat: no-repeat;
     background-size: contain;
-    /* backdrop-filter: blur(1px); */
 }
