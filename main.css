@@ -238,13 +238,13 @@ h2 {
 }
 
 .hit {
-    background-image: url("hit.png");
+    background-image: url("./images/hit.png");
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .miss {
-    background-image: url("missed.png");
+    background-image: url("./images/missed.png");
     background-repeat: no-repeat;
     background-size: contain;
     /* backdrop-filter: blur(1px); */
