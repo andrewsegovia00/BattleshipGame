@@ -438,8 +438,6 @@ function renderCompBoard(guess, missOrHit, RESTART = 0) {
     if(RESTART === 1)
     {
         const compBoardCells = compBoard.querySelectorAll(`td.cells`);
-        console.log(compBoardCells);
-        console.log(compBoard);
         for(let i = 0; i < compBoardCells.length; i++)
         {
             compBoardCells[i].classList.remove(`hit`);
@@ -462,8 +460,6 @@ function renderUserBoard(guess, missOrHit, RESTART = 0) {
     if(RESTART === 1)
     {
         const userBoardCells = userBoard.querySelectorAll(`td.cells`);
-        console.log(userBoardCells);
-        console.log(userBoard);
         for(let i = 0; i < userBoardCells.length; i++)
         {
             userBoardCells[i].classList.remove(`hit`);
@@ -515,6 +511,7 @@ function resetBoards(){
     guessInput.disabled = false; 
     fireBtn.addEventListener(`click`, handleFireBtn);
     userBoard.addEventListener(`click`, handleCellClick);
+    winner = null;
 }
 
 init();
