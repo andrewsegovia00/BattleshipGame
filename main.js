@@ -190,10 +190,12 @@ function init() {
 }
 
 function handleGuess(guess, firstShip, secondShip, thirdShip) {
+    let overseaGuess;
     let isHit = firstShip.handleFiring(guess) || secondShip.handleFiring(guess)||
         thirdShip.handleFiring(guess);
         if(isHit && firstShip.sunk && secondShip.sunk && thirdShip.sunk)
         {
+            turn === 1 ? renderUserBoard(guess, `success`) : renderCompBoard(guess, `success`);
             fireBtn.disabled = true;
             fireBtn.removeEventListener(`click`, handleFireBtn);
             guessInput.disabled = true; 
@@ -212,254 +214,145 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
         }
 }
 
-function improvedRandomGuess(ship, location) {
-    let counter = 0;
+function improvedRandomGuess(ship, location, counter) 
+{
     let compSuccessfulHits = [];
     let xAxis = null;
     let yAxis = null;
     let improvGuess = null;
+
+    let firstChar = location[0];
+    firstChar = LETTERBOARD.indexOf(firstChar);
+    let secondChar = parseInt(location[1]);
+    console.log(`This is the location at 0: ${firstChar} And location 1: ${secondChar}`)
+
     for(let i = 0; i < ship.succesfulHits.length; i++)
     {
         if(ship.succesfulHits[i] === `success`)
         {
             compSuccessfulHits.push(ship.shipLocation[i]);
-            counter++;
         }
     }
     console.log(`this is the counter: ${counter}`);
     console.log(compSuccessfulHits);
 
-    if(counter > 1)
+    do
     {
-        if(compSuccessfulHits[0][0] === compSuccessfulHits[1][0])
-        {
-            do{
-                const randomIndex = Math.floor(Math.random() * counter);
-                const randomNum = Math.floor(Math.random() * (BOARDSIZE - ship.shipLength));
-                let firstChar = compSuccessfulHits[randomIndex][0];
-                let secondChar = compSuccessfulHits[randomIndex][1];
-                console.log(`location 0: ${compSuccessfulHits[randomIndex][0]}`)
-                console.log(`location 1: ${secondChar}`)
-                const addingOrSubstracting = Math.random() * 2;
-                if(secondChar === 6)
-                {
-                    console.log(`this is the improvGuess 1.3500`)
-                    if(compGuesses.includes(firstChar + (secondChar - 1)))
-                    {
-                        console.log(`this is the improvGuess 1.355`)
-                        console.log(`HERE: ${compGuesses.includes(firstChar + (secondChar - 1))}`)
-                        console.log(randomNum);
-                        xAxis = secondChar - randomNum;
-                        
-                    }
-                    else
-                    {
-                        console.log(`this is the improvGuess 1.3400`)
-                        xAxis = secondChar - 1;
-                    }
-                    
-                }
-                else if (secondChar === 0)
-                {
-                    if(compGuesses.includes(firstChar + (secondChar + 1)))
-                    {
-                        console.log(`this is the improvGuess 1.3600`)
-                        xAxis = secondChar + randomNum;
-                    }
-                    else
-                    {
-                        console.log(`this is the improvGuess 1.3700`)
-                        xAxis = secondChar + 1;
-                    }
-                }
-                else if(addingOrSubstracting == 1)
-                {
-                    console.log(`this is the improvGuess 1.3900`)
-                    xAxis = secondChar + 1
-                }
-                else
-                {
-                    console.log(`this is the improvGuess 1.3950`)
-                    xAxis = secondChar - 1;
-                }
-                yAxis = firstChar;
-                improvGuess = yAxis + xAxis;
-                console.log(`Location Guess from counter > 1 if: ${improvGuess}`);
-            }while(compGuesses.includes(improvGuess))
-            console.log(`this is the improvGuess 1.3: ${improvGuess}`)
-        }
-        else
-        {
-            do{
-                const randomNum = Math.floor(Math.random() * (LETTERBOARD - ship.shipLength));
-                const randomIndex = Math.floor(Math.random() * counter);
-                const addingOrSubstracting = Math.floor(Math.random() * 2);
-                let firstChar = compSuccessfulHits[randomIndex][0];
-                firstChar = LETTERBOARD.indexOf(firstChar);
-                if(firstChar === 6)
-                {
-                    if(compGuesses.includes((firstChar - 1) + secondChar))
-                    {
-                        yAxis = firstChar - randomNum;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                    else
-                    {
-                        yAxis = firstChar - 1;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                }
-                else if (firstChar === 0)
-                {
-                    if(compGuesses.includes((firstChar + 1) + secondChar))
-                    {
-                        yAxis = firstChar + randomNum;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                    else
-                    {
-                        yAxis = firstChar + 1;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                }
-                else
-                {
-                    yAxis = addingOrSubstracting === 1 ? firstChar + 1 : firstChar - 1;
-                    yAxis = LETTERBOARD[yAxis];
-                }
-                xAxis = compSuccessfulHits[randomIndex][1];
-                improvGuess = yAxis + xAxis;
-                console.log(`Location Guess from counter > 1 else ${improvGuess}`);
-            }while(compGuesses.includes(improvGuess))
-            console.log(`this is the improvGuess 1.450: ${improvGuess}`)
-        }
-        console.log(`this is the improvGuess 1.4: ${improvGuess}`)
-        return improvGuess;
-    }
-    else if(counter === 1)
-    {
+        let randomGuess = Math.floor(Math.random() * 7);
         const side = Math.floor(Math.random() * 2);
-        let firstChar = location[0];
-        console.log(`location 0: ${firstChar}`)
-        let secondChar = parseInt(location[1]);
-        console.log(`location 1: ${secondChar}`)
-        if(side === 1)
-        {
-            do{
-                const randomNum = Math.floor(Math.random() * (LETTERBOARD - ship.shipLength));
-                firstChar = LETTERBOARD.indexOf(firstChar);
-                const addingOrSubstracting = Math.floor(Math.random() * 2);
+        const addingOrSubstracting = Math.floor(Math.random() * 2);
 
-                if(firstChar === 6)
-                {
-                    if(compGuesses.includes((firstChar - 1) + secondChar))
-                    {
-                        console.log(compGuesses.includes((firstChar - 1) + secondChar))
-                        yAxis = firstChar + randomNum;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                    else
-                    {
-                        yAxis = firstChar - 1;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                }
-                else if (firstChar === 0)
-                {
-                    if(compGuesses.includes((firstChar - 1) + secondChar))
-                    {
-                        console.log(compGuesses.includes((firstChar + 1) + secondChar))
-                        yAxis = firstChar + randomNum;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                    else
-                    {
-                        yAxis = firstChar + 1;
-                        yAxis = LETTERBOARD[yAxis];
-                    }
-                }
-                else
-                {
-                    yAxis = addingOrSubstracting === 1 ? firstChar + 1 : firstChar - 1;
-                    yAxis = LETTERBOARD[yAxis];
-                }
-                xAxis = location[1];
-                improvGuess = yAxis + xAxis;
-                console.log(`Location Guess from counter === 1 if ${improvGuess}`);
-            }while(compGuesses.includes(improvGuess))
-            console.log(`this is the improvGuess 1.5: ${improvGuess}`)
-        }
-        else
+        if(counter === 1)
         {
-            do{
-                const randomNum = Math.floor(Math.random() * (LETTERBOARD - ship.shipLength));
-                const addingOrSubstracting = Math.floor(Math.random() * 2);
-                if(secondChar === 6)
-                {
-                    if(compGuesses.includes(firstChar + (secondChar - 1)))
-                    {
-                        console.log(`=== else 1 .2`)
-                        console.log(compGuesses.includes(firstChar + (secondChar + 1)))
-                        xAxis = secondChar - randomNum;
-                        console.log(xAxis);
-                    }
-                    else
-                    {
-                        console.log(`=== else 1 .3`)
-                        xAxis = secondChar - 1;
-                    }
-                }
-                else if (secondChar === 0)
-                {
-                    if(compGuesses.includes(firstChar + (secondChar + 1)))
-                    {
-                        console.log(`=== else 1 .4`)
-                        console.log(compGuesses.includes(firstChar + (secondChar + 1)))
-                        xAxis = secondChar + randomNum;
-                        console.log(xAxis);
-                    }
-                    else
-                    {
-                        console.log(`=== else 1 .5`)
-                        xAxis = secondChar + 1;
-                    }
-                }
-                else
-                {
-                    xAxis = addingOrSubstracting === 1 ? (secondChar + 1) : (secondChar - 1);
-                }
-                yAxis = location[0];
-                improvGuess = yAxis + xAxis;
-                console.log(`Location Guess from counter === 1 else ${improvGuess}`);
-            }while(compGuesses.includes(improvGuess))
+            if(side === 1) // Vertical B0
+            {
+                console.log(`This is the y Axis ` + yAxis +  ` This is the x Axis ` + xAxis + `1`);
+                yAxis = addingOrSubstracting === 1 ? firstChar - 1 : firstChar + 1;
+                xAxis = secondChar;
+
+                console.log(`Vertical: Second Char == 6 && side 1 && counter === 1 (5)`);
+                console.log(`This is the y axis: ` + yAxis + ` This is the x Axis ` + xAxis + ` (H)`);
+            }
+            else //Horizontal
+            {
+                console.log(`This is the y Axis ` + yAxis +  ` This is the x Axis ` + xAxis);
+                yAxis = firstChar;
+                xAxis = addingOrSubstracting === 1 ? secondChar - 1 : secondChar + 1;
+                console.log(`Horizontal: Second Char == 6 && side 1 && counter === 1 (6)`);
+                console.log(`This is the y Axis ` + yAxis +  ` This is the x Axis ` + xAxis + ` (V)`);
+            }
         }
-        return improvGuess;
-    }
-    return;
+        else if(counter > 1) 
+        {
+            if(compSuccessfulHits[0][0] === compSuccessfulHits[1][0])//Horizontal  B0 && B1 && B2
+            {
+                let randomNum = Math.floor(Math.random() * 2);
+                if(randomNum === 0)
+                {
+                    xAxis = addingOrSubstracting === 1 ? secondChar - 1 : secondChar + 1;
+                    yAxis = firstChar;
+                    console.log(`Horizontal: Second Char == 6 && counter > 1 (2)`);
+                    console.log(`This is the y Axis ` + yAxis + ` This is the x Axis ` + xAxis);
+                    if(compGuesses.includes(compSuccessfulHits[0]) && compGuesses.includes((compSuccessfulHits[1])) && compGuesses.includes((compSuccessfulHits[2])))
+                    {
+                        xAxis = randomGuess;
+                        console.log(`Horizontal: Second Char == 6 && counter > 1 (2.55555)`);
+                        console.log(`This is the y Axis ` + yAxis + ` This is the x Axis ` + xAxis);
+                    }
+                }
+                else if (randomNum === 1)
+                {
+                    xAxis = addingOrSubstracting === 1 ? secondChar - counter: secondChar + counter;
+                    yAxis = firstChar;
+                    console.log(`Horizontal: Second Char == 6 && counter > 1 (1)`);
+                    console.log(`This is the y Axis ` + yAxis + ` This is the x Axis ` + xAxis);
+                }
+            }
+            else //Vertical //B0 && C0 D0
+            {
+                let randomNum = Math.floor(Math.random() * 2);
+                if(randomNum === 0)
+                {
+                    yAxis = addingOrSubstracting === 1 ? firstChar - 1 : firstChar + 1;
+                    xAxis = secondChar;
+                    console.log(`Vertical: Second Char == 6 && counter > 1 (3)`);
+                    console.log(`This is the y Axis ` + yAxis + ` This is the x Axis ` + xAxis);
+                    if(compGuesses.includes(compSuccessfulHits[0]) && compGuesses.includes((compSuccessfulHits[1])) && compGuesses.includes((compSuccessfulHits[2])))
+                    {
+                        yAxis = randomGuess;
+                        console.log(`Horizontal: Second Char == 6 && counter > 1 (3.55555)`);
+                        console.log(`This is the y Axis ` + yAxis + ` This is the x Axis ` + xAxis);
+                    }
+                }
+                else if (randomNum === 1)
+                {
+                    yAxis = addingOrSubstracting === 1 ? firstChar - counter: firstChar + counter;
+                    xAxis = secondChar;
+                    console.log(`Vertical: Second Char == 6 && counter > 1 (4)`);
+                    console.log(`This is the y Axis ` + yAxis + ` This is the x Axis ` + xAxis);
+                }
+            }
+        }
+        console.log(`This is the pre final yAxis ` + yAxis + ` This is the pre final xAxis ` + xAxis)
+        console.log(compGuesses);
+    }while(xAxis > 6 || xAxis < 0 || yAxis < 0 || yAxis > 6 || compGuesses.includes(LETTERBOARD[yAxis] + xAxis))
+    console.log(yAxis);
+    yAxis = LETTERBOARD[yAxis];
+    console.log(yAxis);
+    console.log(yAxis + `` +  xAxis);
+    console.log(yAxis + xAxis);
+    improvGuess = yAxis + xAxis;
+    console.log(improvGuess)
+    improvGuess = yAxis + `` +  xAxis;
+    console.log(improvGuess)
+    return improvGuess;
 }
 
 function computerGuessingImproved() {
     let shipHitLocation;
-    const firstShipIndex = computerFirstShip.succesfulHits.indexOf(`success`);
-    const secondShipIndex = computerSecondShip.succesfulHits.indexOf(`success`);
-    const thirdShipIndex = computerThirdShip.succesfulHits.indexOf(`success`);
-
-    if(firstShipIndex >= 0 && computerFirstShip.sunk !== true)
+    const firstShipIndex = computerFirstShip.succesfulHits.filter(hit => hit === `success`).length;
+    const secondShipIndex = computerSecondShip.succesfulHits.filter(hit => hit === `success`).length;
+    const thirdShipIndex = computerThirdShip.succesfulHits.filter(hit => hit === `success`).length;
+    const firstShipCounter = computerFirstShip.succesfulHits.filter(hit => hit === `success`).length;
+    const secondShipCounter = computerSecondShip.succesfulHits.filter(hit => hit === `success`).length;
+    const thirdShipCounter = computerThirdShip.succesfulHits.filter(hit => hit === `success`).length;
+    
+    if(firstShipIndex > 0 && computerFirstShip.sunk !== true)
     {
         shipHitLocation = computerFirstShip.shipLocation[firstShipIndex];
-        return improvedRandomGuess(computerFirstShip, shipHitLocation);
+        return improvedRandomGuess(computerFirstShip, shipHitLocation, firstShipCounter);
     }
-    else if(secondShipIndex >= 0 && computerSecondShip.sunk !== true)
+    else if(secondShipIndex > 0 && computerSecondShip.sunk !== true)
     {
         shipHitLocation = computerSecondShip.shipLocation[secondShipIndex];
-        return improvedRandomGuess(computerSecondShip, shipHitLocation);
+        return improvedRandomGuess(computerSecondShip, shipHitLocation, secondShipCounter);
     }
-    else if(thirdShipIndex >= 0 && computerThirdShip.sunk !== true)
+    else if(thirdShipIndex > 0 && computerThirdShip.sunk !== true)
     {
         shipHitLocation = computerThirdShip.shipLocation[thirdShipIndex];
-        return improvedRandomGuess(computerThirdShip, shipHitLocation);
+        return improvedRandomGuess(computerThirdShip, shipHitLocation, thirdShipCounter);
     }
-    return false;
+    return;
 }
 
 function shipHasBeenHit() {
@@ -467,7 +360,7 @@ function shipHasBeenHit() {
     const secondShipIndex = computerSecondShip.succesfulHits.indexOf(`success`);
     const thirdShipIndex = computerThirdShip.succesfulHits.indexOf(`success`);
 
-    if(firstShipIndex >= 0 || secondShipIndex >= 0 || thirdShipIndex >= 0)
+    if((firstShipIndex >= 0 && computerFirstShip.sunk === false) || (secondShipIndex >= 0 && computerSecondShip.sunk === false) || (thirdShipIndex >= 0 && computerThirdShip.sunk === false))
     {
         return true;
     }
@@ -476,28 +369,31 @@ function shipHasBeenHit() {
 }
 
 function computerGuess() {
-    let guessValue = null;
+    let guessValue = null
     if(shipHasBeenHit())
     {
         guessValue =  computerGuessingImproved();
+        return guessValue
     }
     else
     {
         do{
             let yAxis = LETTERBOARD[Math.floor(Math.random() * 7)];
             let xAxis = Math.floor(Math.random() * 7);
-            let guessValue = yAxis + xAxis;
+            console.log(`computer guess: ${yAxis}, ${xAxis}`);
+            guessValue = yAxis + xAxis;
             console.log(`computer guess: ${guessValue}`);
-        }while(compGuesses.indexOf(guessValue) >= 0)
+        }while(compGuesses.includes(guessValue) === true)
         return guessValue;
     }
-    return guessValue;
+    // return guessValue;
 }
 
 function handleFireBtn() {
     fireBtn.disabled = true;
     fireBtn.removeEventListener(`click`, handleFireBtn);
     let compGuess = computerGuess();
+    console.log(compGuess);
     const guessValue = guessInput.value;
 
     handleGuess(guessValue, firstShip, secondShip, thirdShip);
@@ -523,6 +419,7 @@ function handleCellClick(event) {
     let compGuess = computerGuess();
 
     handleGuess(guessValue, firstShip, secondShip, thirdShip);
+    console.log(`New computer Guess: ` + compGuess);
     turn *= -1;
     if(firstShip.sunk && secondShip.sunk && thirdShip.sunk)
     {
