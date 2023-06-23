@@ -160,6 +160,7 @@ const guessInput = document.getElementById(`guessInput`);
 /*----- event listeners -----*/
 fireBtn.addEventListener(`click`, handleFireBtn);
 userBoard.addEventListener(`click`, handleCellClick);
+restartBtn.addEventListener(`click`, resetBoards);
 
 
 
@@ -433,9 +434,20 @@ function renderMessage(text){
     }
 }
 
-function renderCompBoard(guess, missOrHit) {
+function renderCompBoard(guess, missOrHit, RESTART = 0) {
+    if(RESTART === 1)
+    {
+        const compBoardCells = compBoard.querySelectorAll(`td.cells`);
+        console.log(compBoardCells);
+        console.log(compBoard);
+        for(let i = 0; i < compBoardCells.length; i++)
+        {
+            compBoardCells[i].classList.remove(`hit`);
+            compBoardCells[i].classList.remove(`miss`);
+        }
+        return;
+    }
     const cellChange = compBoard.querySelector(`#${guess}`);
-
     if(missOrHit === `success`)
     {
         cellChange.classList.add(`hit`);
@@ -446,7 +458,19 @@ function renderCompBoard(guess, missOrHit) {
     }
 }
 
-function renderUserBoard(guess, missOrHit) {
+function renderUserBoard(guess, missOrHit, RESTART = 0) {
+    if(RESTART === 1)
+    {
+        const userBoardCells = userBoard.querySelectorAll(`td.cells`);
+        console.log(userBoardCells);
+        console.log(userBoard);
+        for(let i = 0; i < userBoardCells.length; i++)
+        {
+            userBoardCells[i].classList.remove(`hit`);
+            userBoardCells[i].classList.remove(`miss`);
+        }
+        return;
+    }
     const cellChange = userBoard.querySelector(`#${guess}`);
     if(missOrHit === `success`)
     {
@@ -458,9 +482,40 @@ function renderUserBoard(guess, missOrHit) {
     }
 }
 
-// function resetBoards(){
+const audioEl = document.getElementById("backgroundMusic");
 
-// }
+function playMusic() {
+    audioEl.currentTime = 40;
+    audioEl.volume = .2;
+    audioEl.play();
+}
+
+function pauseMusic() {
+    audioEl.pause();
+}
+
+function stopMusic() {
+    audioEl.pause();
+    audioEl.currentTime = 40;
+}
+
+function adjustVolume(volume) {
+    audioEl.volume = volume;
+  }
+
+
+function resetBoards(){
+    renderUserBoard(``,``,1);
+    renderCompBoard(``,``,1);
+    renderMessage(``);
+    compGuesses = [];
+    init();
+    fireBtn.disabled = false;
+    userBoard.disabled = false;
+    guessInput.disabled = false; 
+    fireBtn.addEventListener(`click`, handleFireBtn);
+    userBoard.addEventListener(`click`, handleCellClick);
+}
 
 init();
 renderMessage(``);

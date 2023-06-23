@@ -248,3 +248,41 @@ h2 {
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+.musicContainer {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+}
+
+.playBtn {
+    width: 3rem;
+    height: 3rem;
+    background-image: url("./images/playBtn.png");
+    background-size: cover;
+}
+
+.pauseBtn {
+    width: 3rem;
+    height: 3rem;
+    background-image: url("./images/pauseBtn.png");
+    background-size: cover;
+}
+
+.playBtn:hover {
+    background-image: url("./images/clickedPlayBtn.png");
+    background-size: cover;
+}
+
+.pauseBtn:hover {
+    background-image: url("./images/clickedPauseBtn.png");
+    background-size: cover;
+}
+
+#volumeSlider {
+    direction: rtl;
+}
+
+#volumeSlider input[type="range"] {
+    transform: scaleX(-1);
+}
