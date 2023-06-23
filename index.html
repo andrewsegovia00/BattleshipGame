@@ -11,6 +11,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="main.css" />
     <script defer src="main.js"></script>
+    <audio id="backgroundMusic" src="./music/arcadeMusic.mp3" volume="0.1"></audio>
+
 </head>
 
 <body>
@@ -179,7 +181,13 @@
                 <input type="text" class="inputAttack" placeholder="A1" id="guessInput" />
                 <button class="fireBtn" id="fireBtn">FIRE!</button>
             </div>
-            <button class="restartBtn">RESTART</button>
+            <button class="restartBtn" id="restartBtn">RESTART</button>
+        </div>
+        <div class="musicContainer">
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value=".2"
+                onchange="adjustVolume(this.value)">
+            <button class="playBtn" onclick="playMusic()"></button>
+            <button class="pauseBtn" onclick="pauseMusic()"></button>
         </div>
     </div>
 
