@@ -174,8 +174,6 @@ const pauseMusicBtn = document.getElementById(`pauseMusic`);
 const audioEl = document.getElementById("backgroundMusic");
 const audioWinEl = document.getElementById(`winningMusic`);
 
-console.log(startBtn, closeBtn)
-
 /*----- event listeners -----*/
 startBtn.addEventListener(`click`, handleCloseMenu);
 closeBtn.addEventListener(`click`, handleCloseMenu);
