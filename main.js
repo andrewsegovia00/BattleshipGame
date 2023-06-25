@@ -1,6 +1,15 @@
 /*----- constant variables-----*/
 const BOARDSIZE = 7;
 const LETTERBOARD = [`A`, `B`, `C`, `D`, `E`, `F`, `G`];
+const POSCOMBOS = [
+    `A0`,`A1`,`A2`,`A3`,`A4`,`A5`,`A6`,
+    `B0`,`B1`,`B2`,`B3`,`B4`,`B5`,`B6`,
+    `C0`,`C1`,`C2`,`C3`,`C4`,`C5`,`C6`,
+    `D0`,`D1`,`D2`,`D3`,`D4`,`D5`,`D6`,
+    `E0`,`E1`,`E2`,`E3`,`E4`,`E5`,`E6`,
+    `F0`,`F1`,`F2`,`F3`,`F4`,`F5`,`F6`,
+    `G0`,`G1`,`G2`,`G3`,`G4`,`G5`,`G6`
+]
 
 /*----- app's state (variables) -----*/
 let winner = null;
@@ -151,19 +160,30 @@ class Smallship extends Ships {
 
 
 /*----- cached element references -----*/
-const fireBtn = document.getElementById(`fireBtn`);
 const message = document.getElementById(`messageBoard`);
 const compBoard = document.getElementById(`compBoard`);
 const userBoard = document.getElementById(`userBoard`);
 const guessInput = document.getElementById(`guessInput`);
 
+const startBtn = document.getElementById(`startBtn`);
+const closeBtn = document.getElementById(`closeBtn`);
+const fireBtn = document.getElementById(`fireBtn`);
+const restartBtn = document.getElementById(`restartBtn`);
+const playMusicBtn = document.getElementById(`playMusic`);
+const pauseMusicBtn = document.getElementById(`pauseMusic`);
+const audioEl = document.getElementById("backgroundMusic");
+const audioWinEl = document.getElementById(`winningMusic`);
+
+console.log(startBtn, closeBtn)
+
 /*----- event listeners -----*/
+startBtn.addEventListener(`click`, handleCloseMenu);
+closeBtn.addEventListener(`click`, handleCloseMenu);
 fireBtn.addEventListener(`click`, handleFireBtn);
 userBoard.addEventListener(`click`, handleCellClick);
 restartBtn.addEventListener(`click`, resetBoards);
-
-
-
+playMusicBtn.addEventListener(`click`, playMusic)
+pauseMusicBtn.addEventListener(`click`, pauseMusic)
 
 /*----- functions -----*/
 function init() {
@@ -199,6 +219,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
             guessInput.disabled = true; 
             winner = `winner`;
             turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
+            playWinningMusic();
         }
         else if(isHit && computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
         {
@@ -208,6 +229,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
             guessInput.disabled = true; 
             winner = `winner`;
             turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
+            playWinningMusic();
         }
         else if(isHit)
         {
@@ -227,7 +249,7 @@ function improvedRandomGuess(ship, location, counter)
     let xAxis = null;
     let yAxis = null;
     let improvGuess = null;
-
+    let crashPrevention = 0;
     let firstChar = location[0];
     firstChar = LETTERBOARD.indexOf(firstChar);
     let secondChar = parseInt(location[1]);
@@ -262,6 +284,10 @@ function improvedRandomGuess(ship, location, counter)
             {
                 yAxis = firstChar;
                 xAxis = addingOrSubstracting === 1 ? secondChar - 1 : secondChar + 1;
+                if(compGuesses.includes(compSuccessfulHits[0]) && compGuesses.includes((compSuccessfulHits[1])) && compGuesses.includes((compSuccessfulHits[2])))
+                {
+                    xAxis = randomGuess;
+                }
             }
         }
         else if(counter > 1) 
@@ -310,6 +336,12 @@ function improvedRandomGuess(ship, location, counter)
                     }
                 }
             }
+        }
+        crashPrevention++
+        if(crashPrevention > 15)
+        {
+            yAxis = Math.floor(Math.random() * BOARDSIZE);
+            xAxis = Math.floor(Math.random() * BOARDSIZE);
         }
     }while(xAxis > 6 || xAxis < 0 || yAxis < 0 || yAxis > 6 || compGuesses.includes(LETTERBOARD[yAxis] + xAxis))
     yAxis = LETTERBOARD[yAxis];
@@ -379,7 +411,8 @@ function handleFireBtn() {
     fireBtn.disabled = true;
     fireBtn.removeEventListener(`click`, handleFireBtn);
     let compGuess = computerGuess();
-    const guessValue = guessInput.value;
+    let guessValue = guessInput.value.toUpperCase();
+    guessValue = guessValue.replace(/[^A-G1-6]/g, '');
 
     handleGuess(guessValue, firstShip, secondShip, thirdShip);
     turn *= -1;
@@ -393,7 +426,7 @@ function handleFireBtn() {
         turn *= -1;
         fireBtn.disabled = false;
         fireBtn.addEventListener(`click`, handleFireBtn);
-    }, 2500);
+    }, 750);
 }
 
 function handleCellClick(event) {
@@ -420,7 +453,7 @@ function handleCellClick(event) {
         turn *= -1;
         userBoard.disabled = false;
         userBoard.addEventListener(`click`, handleCellClick);
-    }, 2500);
+    }, 750);
 }
 
 function renderMessage(text){
@@ -438,8 +471,6 @@ function renderCompBoard(guess, missOrHit, RESTART = 0) {
     if(RESTART === 1)
     {
         const compBoardCells = compBoard.querySelectorAll(`td.cells`);
-        console.log(compBoardCells);
-        console.log(compBoard);
         for(let i = 0; i < compBoardCells.length; i++)
         {
             compBoardCells[i].classList.remove(`hit`);
@@ -459,30 +490,38 @@ function renderCompBoard(guess, missOrHit, RESTART = 0) {
 }
 
 function renderUserBoard(guess, missOrHit, RESTART = 0) {
-    if(RESTART === 1)
+    if(POSCOMBOS.includes(guess))
     {
-        const userBoardCells = userBoard.querySelectorAll(`td.cells`);
-        console.log(userBoardCells);
-        console.log(userBoard);
-        for(let i = 0; i < userBoardCells.length; i++)
+        if(RESTART === 1)
         {
-            userBoardCells[i].classList.remove(`hit`);
-            userBoardCells[i].classList.remove(`miss`);
+            const userBoardCells = userBoard.querySelectorAll(`td.cells`);
+            for(let i = 0; i < userBoardCells.length; i++)
+            {
+                userBoardCells[i].classList.remove(`hit`);
+                userBoardCells[i].classList.remove(`miss`);
+            }
+            return;
         }
-        return;
+        const cellChange = userBoard.querySelector(`#${guess}`);
+        if(missOrHit === `success`)
+        {
+            cellChange.classList.add(`hit`);
+        }
+        else
+        {
+            cellChange.classList.add(`miss`);
+        }
     }
-    const cellChange = userBoard.querySelector(`#${guess}`);
-    if(missOrHit === `success`)
-    {
-        cellChange.classList.add(`hit`);
-    }
-    else
-    {
-        cellChange.classList.add(`miss`);
-    }
+    return;
 }
 
-const audioEl = document.getElementById("backgroundMusic");
+function playWinningMusic() {
+    audioEl.pause();
+    audioWinEl.play();
+    setTimeout(() => {
+        audioWinEl.pause();
+    }, 4400);
+}
 
 function playMusic() {
     audioEl.currentTime = 40;
@@ -503,8 +542,31 @@ function adjustVolume(volume) {
     audioEl.volume = volume;
   }
 
+function handleCloseMenu() {
+    const menu = document.getElementById(`menu`);
+    const overlayMenu = document.getElementById(`overlayMenu`);
+    menu.classList.add(`closeMenu`);   
+    overlayMenu.classList.add(`closeOverlay`);
+
+}
+
 
 function resetBoards(){
+    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk) 
+    {
+        if(turn !== 1)
+        {
+            turn *= -1;
+        }
+    }
+    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk) 
+    {
+        if(turn !== -1)
+        {
+            turn *= -1;
+        }
+    }
+
     renderUserBoard(``,``,1);
     renderCompBoard(``,``,1);
     renderMessage(``);
@@ -515,6 +577,9 @@ function resetBoards(){
     guessInput.disabled = false; 
     fireBtn.addEventListener(`click`, handleFireBtn);
     userBoard.addEventListener(`click`, handleCellClick);
+    winner = null;
+    turn = 1;
+
 }
 
 init();

@@ -180,7 +180,6 @@ h2 {
     border-radius: 20px 0px 0px 20px;
 }
 
-/* Input Box */
 .inputAttack {
     width: 3.5rem;
     height: 2rem;
@@ -285,4 +284,108 @@ h2 {
 
 #volumeSlider input[type="range"] {
     transform: scaleX(-1);
+}
+
+.asteriskText {
+    font-size: .6rem;
+    color: rgb(72, 220, 151);
+}
+
+.htpText {
+    font-size: 1.2rem;
+}
+
+.popUpTextContainer {
+    font-size: .8rem;
+}
+
+.popUpContainer {
+    position: fixed;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    background-color: #311d34;
+    padding: 2rem;
+    border-radius: 20px;
+    z-index: 10;
+    width: auto;
+    max-width: 500px;
+    line-height: 1.5;
+}
+
+.closeMenu {
+    position: fixed;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    background-color: #311d34;
+    padding: 2rem;
+    border-radius: 20px;
+    z-index: 10;
+    width: auto;
+    max-width: 70%;
+    visibility: hidden;
+}
+
+.popUpTitleContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.startBtn {
+    width: 8rem;
+    height: 3rem;
+    background-image: url("./images/startBtn.png");
+    background-size: contain;
+    border-radius: 0px;
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.closeBtn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+.popUpOverlay {
+    background-color: rgba(205, 205, 205, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+}
+
+.closeOverlay {
+    background-color: rgba(205, 205, 205, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+    visibility: hidden;
+}
+
+.shipInfo {
+    color: #d41212;
+}
+
+.startBtnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: .5rem;
 }

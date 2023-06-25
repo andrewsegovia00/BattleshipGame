@@ -12,11 +12,40 @@
     <link rel="stylesheet" href="main.css" />
     <script defer src="main.js"></script>
     <audio id="backgroundMusic" src="./music/arcadeMusic.mp3" volume="0.1"></audio>
-
+    <audio id="winningMusic" src="./music/winningSound.mp3" volume="0.1"></audio>
 </head>
 
 <body>
     <div class="container">
+        <div class="popUpContainer" id="menu">
+            <div class="popUpTitleContainer">
+                <h1 class="htpText">How To Play</h1>
+                <button class="closeBtn" id="closeBtn">&times;</button>
+            </div>
+            <div class="popUpTextContainer">
+                <p>Your objective is to shoot down 3 battleships.</p>
+                <ul>
+                    <li>Main ship: <span class="shipInfo">5 squares</span></li>
+                    <li>Medium Cruiser: <span class="shipInfo">4 squares</span> </li>
+                    <li>Small ship: <span class="shipInfo">3 squares</span></li>
+                </ul>
+                <p>
+                    Click any of the squares on the right hand-side board to select your shot
+                </p>
+                <p>
+                    OR
+                </p>
+                <p>
+                    Write a selection between A-G (Ver) and 0-6 (Horiz)
+                </p>
+                <p class="asteriskText">
+                    *There's cool background music, just press the -PLAY BUTTON- at the top-right hand side.
+                </p>
+            </div>
+            <div class="startBtnContainer">
+                <button class="startBtn" id="startBtn"></button>
+            </div>
+        </div>
         <div class="textHeadline">
             <h1 class="currentGameStatus">Battleship</h1>
             <h1 class="currentGameStatus" id="messageBoard">Opponent hit your ship!</h1>
@@ -178,7 +207,7 @@
         <div class="bottomBoard">
             <div class="inputContainer">
                 <p class="userInput">Write your Guess</p>
-                <input type="text" class="inputAttack" placeholder="A1" id="guessInput" />
+                <input type="text" class="inputAttack" placeholder="A1" id="guessInput" maxlength="2" />
                 <button class="fireBtn" id="fireBtn">FIRE!</button>
             </div>
             <button class="restartBtn" id="restartBtn">RESTART</button>
@@ -186,11 +215,11 @@
         <div class="musicContainer">
             <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value=".2"
                 onchange="adjustVolume(this.value)">
-            <button class="playBtn" onclick="playMusic()"></button>
-            <button class="pauseBtn" onclick="pauseMusic()"></button>
+            <button class="playBtn" id="playMusic"></button>
+            <button class="pauseBtn" id="pauseMusic"></button>
         </div>
+        <div class="popUpOverlay" id="overlayMenu"></div>
     </div>
-
 </body>
 
 </html>
