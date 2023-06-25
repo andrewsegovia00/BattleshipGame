@@ -12,11 +12,42 @@
     <link rel="stylesheet" href="main.css" />
     <script defer src="main.js"></script>
     <audio id="backgroundMusic" src="./music/arcadeMusic.mp3" volume="0.1"></audio>
-
+    <audio id="backgroundMusic" src="./music/winningSound.mp3" volume="0.1"></audio>
 </head>
 
 <body>
     <div class="container">
+        <div class="popUpContainer" id="menu">
+            <div class="popUpTitleContainer">
+                <h1>How To Play</h1>
+                <button class="closeBtn" id="closeBtn">&times;</button>
+            </div>
+            <div class="popUpTextContainer">
+                <p>
+                    Your objective is to shoot down 3 battleships.
+                </p>
+                <ul>
+                    <li>
+                        Main ship: <span class="shipInfo">5 spots</span>
+                    </li>
+                    <li>
+                        Medium Cruiser: <span class="shipInfo">4 spots</span>
+                    </li>
+                    <li>
+                        Small ship: <span class="shipInfo">3 spots</span>
+                    </li>
+                </ul>
+                <p>
+                    Click any square on the right hand-side board to fire a shot
+                </p>
+                <p class="asteriskText">
+                    *There's cool background music, just press the -PLAY BUTTON- at the top-right hand side.
+                </p>
+            </div>
+            <div class="startBtnContainer">
+                <button class="startBtn" id="startBtn"></button>
+            </div>
+        </div>
         <div class="textHeadline">
             <h1 class="currentGameStatus">Battleship</h1>
             <h1 class="currentGameStatus" id="messageBoard">Opponent hit your ship!</h1>
@@ -186,11 +217,13 @@
         <div class="musicContainer">
             <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value=".2"
                 onchange="adjustVolume(this.value)">
-            <button class="playBtn" onclick="playMusic()"></button>
-            <button class="pauseBtn" onclick="pauseMusic()"></button>
+            <button class="playBtn" id="playMusic"></button>
+            <button class="pauseBtn" id="pauseMusic"></button>
         </div>
+        <div class="popUpOverlay" id="overlayMenu"></div>
     </div>
-
+    <!-- onclick="pauseMusic()" -->
+    <!-- onclick="playMusic()"  -->
 </body>
 
 </html>

@@ -151,19 +151,28 @@ class Smallship extends Ships {
 
 
 /*----- cached element references -----*/
-const fireBtn = document.getElementById(`fireBtn`);
 const message = document.getElementById(`messageBoard`);
 const compBoard = document.getElementById(`compBoard`);
 const userBoard = document.getElementById(`userBoard`);
 const guessInput = document.getElementById(`guessInput`);
 
+const startBtn = document.getElementById(`startBtn`);
+const closeBtn = document.getElementById(`closeBtn`);
+const fireBtn = document.getElementById(`fireBtn`);
+const restartBtn = document.getElementById(`restartBtn`);
+const playMusicBtn = document.getElementById(`playMusic`);
+const pauseMusicBtn = document.getElementById(`pauseMusic`);
+
+console.log(startBtn, closeBtn)
+
 /*----- event listeners -----*/
+startBtn.addEventListener(`click`, handleCloseMenu);
+closeBtn.addEventListener(`click`, handleCloseMenu);
 fireBtn.addEventListener(`click`, handleFireBtn);
 userBoard.addEventListener(`click`, handleCellClick);
 restartBtn.addEventListener(`click`, resetBoards);
-
-
-
+playMusicBtn.addEventListener(`click`, playMusic)
+pauseMusicBtn.addEventListener(`click`, pauseMusic)
 
 /*----- functions -----*/
 function init() {
@@ -227,7 +236,7 @@ function improvedRandomGuess(ship, location, counter)
     let xAxis = null;
     let yAxis = null;
     let improvGuess = null;
-
+    let crashPrevention = 0;
     let firstChar = location[0];
     firstChar = LETTERBOARD.indexOf(firstChar);
     let secondChar = parseInt(location[1]);
@@ -262,6 +271,10 @@ function improvedRandomGuess(ship, location, counter)
             {
                 yAxis = firstChar;
                 xAxis = addingOrSubstracting === 1 ? secondChar - 1 : secondChar + 1;
+                if(compGuesses.includes(compSuccessfulHits[0]) && compGuesses.includes((compSuccessfulHits[1])) && compGuesses.includes((compSuccessfulHits[2])))
+                {
+                    xAxis = randomGuess;
+                }
             }
         }
         else if(counter > 1) 
@@ -310,6 +323,12 @@ function improvedRandomGuess(ship, location, counter)
                     }
                 }
             }
+        }
+        crashPrevention++
+        if(crashPrevention > 15)
+        {
+            yAxis = Math.floor(Math.random() * BOARDSIZE);
+            xAxis = Math.floor(Math.random() * BOARDSIZE);
         }
     }while(xAxis > 6 || xAxis < 0 || yAxis < 0 || yAxis > 6 || compGuesses.includes(LETTERBOARD[yAxis] + xAxis))
     yAxis = LETTERBOARD[yAxis];
@@ -393,7 +412,7 @@ function handleFireBtn() {
         turn *= -1;
         fireBtn.disabled = false;
         fireBtn.addEventListener(`click`, handleFireBtn);
-    }, 2500);
+    }, 750);
 }
 
 function handleCellClick(event) {
@@ -420,7 +439,7 @@ function handleCellClick(event) {
         turn *= -1;
         userBoard.disabled = false;
         userBoard.addEventListener(`click`, handleCellClick);
-    }, 2500);
+    }, 750);
 }
 
 function renderMessage(text){
@@ -499,8 +518,31 @@ function adjustVolume(volume) {
     audioEl.volume = volume;
   }
 
+function handleCloseMenu() {
+    const menu = document.getElementById(`menu`);
+    const overlayMenu = document.getElementById(`overlayMenu`);
+    menu.classList.add(`closeMenu`);   
+    overlayMenu.classList.add(`closeOverlay`);
+
+}
+
 
 function resetBoards(){
+    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk) 
+    {
+        if(turn !== 1)
+        {
+            turn *= -1;
+        }
+    }
+    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk) 
+    {
+        if(turn !== -1)
+        {
+            turn *= -1;
+        }
+    }
+
     renderUserBoard(``,``,1);
     renderCompBoard(``,``,1);
     renderMessage(``);
@@ -512,6 +554,8 @@ function resetBoards(){
     fireBtn.addEventListener(`click`, handleFireBtn);
     userBoard.addEventListener(`click`, handleCellClick);
     winner = null;
+    turn = 1;
+
 }
 
 init();
