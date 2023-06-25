@@ -180,7 +180,6 @@ h2 {
     border-radius: 20px 0px 0px 20px;
 }
 
-/* Input Box */
 .inputAttack {
     width: 3.5rem;
     height: 2rem;
@@ -287,6 +286,19 @@ h2 {
     transform: scaleX(-1);
 }
 
+.asteriskText {
+    font-size: .6rem;
+    color: rgb(72, 220, 151);
+}
+
+.htpText {
+    font-size: 1.2rem;
+}
+
+.popUpTextContainer {
+    font-size: .8rem;
+}
+
 .popUpContainer {
     position: fixed;
     right: 50%;
@@ -319,10 +331,6 @@ h2 {
     display: flex;
     justify-content: space-between;
 }
-
-
-.popUpTextContainer {}
-
 
 .startBtn {
     width: 8rem;
@@ -379,10 +387,5 @@ h2 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 1.5rem;
-}
-
-.asteriskText {
-    font-size: 12px;
-    color: rgb(72, 220, 151);
+    margin-top: .5rem;
 }

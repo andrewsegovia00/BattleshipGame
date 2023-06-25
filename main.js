@@ -1,6 +1,15 @@
 /*----- constant variables-----*/
 const BOARDSIZE = 7;
 const LETTERBOARD = [`A`, `B`, `C`, `D`, `E`, `F`, `G`];
+const POSCOMBOS = [
+    `A0`,`A1`,`A2`,`A3`,`A4`,`A5`,`A6`,
+    `B0`,`B1`,`B2`,`B3`,`B4`,`B5`,`B6`,
+    `C0`,`C1`,`C2`,`C3`,`C4`,`C5`,`C6`,
+    `D0`,`D1`,`D2`,`D3`,`D4`,`D5`,`D6`,
+    `E0`,`E1`,`E2`,`E3`,`E4`,`E5`,`E6`,
+    `F0`,`F1`,`F2`,`F3`,`F4`,`F5`,`F6`,
+    `G0`,`G1`,`G2`,`G3`,`G4`,`G5`,`G6`
+]
 
 /*----- app's state (variables) -----*/
 let winner = null;
@@ -162,6 +171,8 @@ const fireBtn = document.getElementById(`fireBtn`);
 const restartBtn = document.getElementById(`restartBtn`);
 const playMusicBtn = document.getElementById(`playMusic`);
 const pauseMusicBtn = document.getElementById(`pauseMusic`);
+const audioEl = document.getElementById("backgroundMusic");
+const audioWinEl = document.getElementById(`winningMusic`);
 
 console.log(startBtn, closeBtn)
 
@@ -208,6 +219,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
             guessInput.disabled = true; 
             winner = `winner`;
             turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
+            playWinningMusic();
         }
         else if(isHit && computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
         {
@@ -217,6 +229,7 @@ function handleGuess(guess, firstShip, secondShip, thirdShip) {
             guessInput.disabled = true; 
             winner = `winner`;
             turn === 1 ? renderMessage(`Player 1 has won!`) : renderMessage(`Computer has won!`);
+            playWinningMusic();
         }
         else if(isHit)
         {
@@ -398,7 +411,8 @@ function handleFireBtn() {
     fireBtn.disabled = true;
     fireBtn.removeEventListener(`click`, handleFireBtn);
     let compGuess = computerGuess();
-    const guessValue = guessInput.value;
+    let guessValue = guessInput.value.toUpperCase();
+    guessValue = guessValue.replace(/[^A-G1-6]/g, '');
 
     handleGuess(guessValue, firstShip, secondShip, thirdShip);
     turn *= -1;
@@ -476,28 +490,38 @@ function renderCompBoard(guess, missOrHit, RESTART = 0) {
 }
 
 function renderUserBoard(guess, missOrHit, RESTART = 0) {
-    if(RESTART === 1)
+    if(POSCOMBOS.includes(guess))
     {
-        const userBoardCells = userBoard.querySelectorAll(`td.cells`);
-        for(let i = 0; i < userBoardCells.length; i++)
+        if(RESTART === 1)
         {
-            userBoardCells[i].classList.remove(`hit`);
-            userBoardCells[i].classList.remove(`miss`);
+            const userBoardCells = userBoard.querySelectorAll(`td.cells`);
+            for(let i = 0; i < userBoardCells.length; i++)
+            {
+                userBoardCells[i].classList.remove(`hit`);
+                userBoardCells[i].classList.remove(`miss`);
+            }
+            return;
         }
-        return;
+        const cellChange = userBoard.querySelector(`#${guess}`);
+        if(missOrHit === `success`)
+        {
+            cellChange.classList.add(`hit`);
+        }
+        else
+        {
+            cellChange.classList.add(`miss`);
+        }
     }
-    const cellChange = userBoard.querySelector(`#${guess}`);
-    if(missOrHit === `success`)
-    {
-        cellChange.classList.add(`hit`);
-    }
-    else
-    {
-        cellChange.classList.add(`miss`);
-    }
+    return;
 }
 
-const audioEl = document.getElementById("backgroundMusic");
+function playWinningMusic() {
+    audioEl.pause();
+    audioWinEl.play();
+    setTimeout(() => {
+        audioWinEl.pause();
+    }, 4400);
+}
 
 function playMusic() {
     audioEl.currentTime = 40;
