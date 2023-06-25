@@ -518,7 +518,7 @@ function playWinningMusic() {
     audioWinEl.play();
     setTimeout(() => {
         audioWinEl.pause();
-    }, 4400);
+    }, 4600);
 }
 
 function playMusic() {
