@@ -13,8 +13,12 @@ A retro arcade themed Battleship Game built with its own opponent. This game was
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## Getting Started
-[Game Link](https://andrewsegovia00.github.io/BattleshipGame/).
+:video_game: How-To-Play: There are *THREE* ships on the board. The main ship takes up 5 squares. Medium ship takes 4 squares. The small ship takes up 3 spaces. The board is 7x7 squares. 
 
+The objetive is to sink all of the ships before the opponent, which can be difficult without a strategy. 
+There's background music for an immersive arcade experience! 
+And most important of all, don't forget to have fun!
+:joystick: [Live Link](https://andrewsegovia00.github.io/BattleshipGame/).
 ## Game Screenshots:
 
 ### Below: The instruction manual once the page loads
@@ -38,14 +42,9 @@ function handleCellClick(event) {
     userBoard.removeEventListener(`click`, handleCellClick);
     let compGuess = computerGuess();
 
-    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
-    {
-        return;
-    }
-
     handleGuess(guessValue, firstShip, secondShip, thirdShip);
     turn *= -1;
-    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk)
+    if(firstShip.sunk && secondShip.sunk && thirdShip.sunk )
     {
         return;
     }
@@ -56,6 +55,11 @@ function handleCellClick(event) {
         userBoard.disabled = false;
         userBoard.addEventListener(`click`, handleCellClick);
     }, 750);
+
+    if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk)
+    {
+        return;
+    }
 }
 ```
 This code snippet showcases the handleCellClick function which is responsible for managing the game flow when a user clicks on a cell. It retrieves the user's guess and temporarily disables the board from further clicks triggering the function. The function then generates the computer's guess and checks if all the computer's ships have been sunk. If so, the function returns.
