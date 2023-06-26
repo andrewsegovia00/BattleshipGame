@@ -515,10 +515,12 @@ function renderUserBoard(guess, missOrHit, RESTART = 0) {
 
 function playWinningMusic() {
     audioEl.pause();
+    audioWinEl.currentTime = 0;
     audioWinEl.play();
     setTimeout(() => {
         audioWinEl.pause();
     }, 4750);
+    audioWinEl.pause();
 }
 
 function playMusic() {
