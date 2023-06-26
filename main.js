@@ -455,7 +455,7 @@ function handleCellClick(event) {
 }
 
 function renderMessage(text){
-    if( text === ``)
+    if(text === ``)
     {
         message.innerText = ``;
     }
