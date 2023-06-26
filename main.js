@@ -455,7 +455,7 @@ function handleCellClick(event) {
 }
 
 function renderMessage(text){
-    if( text === ``)
+    if(text === ``)
     {
         message.innerText = ``;
     }
@@ -488,18 +488,18 @@ function renderCompBoard(guess, missOrHit, RESTART = 0) {
 }
 
 function renderUserBoard(guess, missOrHit, RESTART = 0) {
-    if(POSCOMBOS.includes(guess))
+    if(RESTART === 1)
     {
-        if(RESTART === 1)
+        const userBoardCells = userBoard.querySelectorAll(`td.cells`);
+        for(let i = 0; i < userBoardCells.length; i++)
         {
-            const userBoardCells = userBoard.querySelectorAll(`td.cells`);
-            for(let i = 0; i < userBoardCells.length; i++)
-            {
-                userBoardCells[i].classList.remove(`hit`);
-                userBoardCells[i].classList.remove(`miss`);
-            }
-            return;
+            userBoardCells[i].classList.remove(`hit`);
+            userBoardCells[i].classList.remove(`miss`);
         }
+        return;
+    }
+    else if(POSCOMBOS.includes(guess))
+    {
         const cellChange = userBoard.querySelector(`#${guess}`);
         if(missOrHit === `success`)
         {
@@ -518,7 +518,7 @@ function playWinningMusic() {
     audioWinEl.play();
     setTimeout(() => {
         audioWinEl.pause();
-    }, 4600);
+    }, 4750);
 }
 
 function playMusic() {
@@ -559,24 +559,24 @@ function resetBoards(){
     }
     if(computerFirstShip.sunk && computerSecondShip.sunk && computerThirdShip.sunk) 
     {
-        if(turn !== -1)
+        if(turn !== 1)
         {
             turn *= -1;
         }
     }
-
-    renderUserBoard(``,``,1);
-    renderCompBoard(``,``,1);
-    renderMessage(``);
-    compGuesses = [];
-    init();
-    fireBtn.disabled = false;
-    userBoard.disabled = false;
-    guessInput.disabled = false; 
-    fireBtn.addEventListener(`click`, handleFireBtn);
-    userBoard.addEventListener(`click`, handleCellClick);
-    winner = null;
-    turn = 1;
+    setTimeout( () => {
+        renderUserBoard(``,``,1);
+        renderCompBoard(``,``,1);
+        renderMessage(``);
+        compGuesses = [];
+        init();
+        fireBtn.disabled = false;
+        userBoard.disabled = false;
+        guessInput.disabled = false; 
+        fireBtn.addEventListener(`click`, handleFireBtn);
+        userBoard.addEventListener(`click`, handleCellClick);
+        winner = null;
+    }, 500)
 
 }
 
