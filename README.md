@@ -5,7 +5,7 @@
 A retro arcade themed Battleship Game built with its own opponent. This game was my first General Assembly Software Engineering Immersive project. The game includes background music with a How-To-Play manual. In addition, the computer opponent includes advanced logic to beat the player if they are not careful.
 
 ## Below: The Wireframe of the Game
-![A screenshot showcasing the wireframe of battleship game.](./images/Wireframe.png)
+![A screenshot showcasing the wireframe of battleship game.](./images/WireFrame.png)
 
 ## Technologies Used:
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
@@ -13,12 +13,14 @@ A retro arcade themed Battleship Game built with its own opponent. This game was
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## Getting Started
-:video_game: How-To-Play: There are *THREE* ships on the board. The main ship takes up 5 squares. Medium ship takes 4 squares. The small ship takes up 3 spaces. The board is 7x7 squares. 
+How-To-Play: There are *THREE* ships on the board. The main ship takes up 5 squares. Medium ship takes 4 squares. The small ship takes up 3 spaces. The board is 7x7 squares. 
 
 The objetive is to sink all of the ships before the opponent, which can be difficult without a strategy. 
 There's background music for an immersive arcade experience! 
 And most important of all, don't forget to have fun!
-:joystick: [Live Link](https://andrewsegovia00.github.io/BattleshipGame/).
+
+:video_game: [Live Link](https://andrewsegovia00.github.io/BattleshipGame/).
+
 ## Game Screenshots:
 
 ### Below: The instruction manual once the page loads
