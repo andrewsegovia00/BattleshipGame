@@ -9,11 +9,13 @@ A retro arcade themed Battleship Game built with its own opponent. This game was
 
 ## Technologies Used:
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## Getting Started
-How-To-Play: There are **THREE ships** on the board. The main ship takes up 5 squares. Medium ship takes 4 squares. The small ship takes up 3 spaces. The board is 7x7 squares. 
+How-To-Play: There are **THREE SHIPS** on the board. The main ship takes up 5 squares. Medium ship takes 4 squares. The small ship takes up 3 spaces. The board is 7x7 squares. 
 
 The objetive is to sink all of the ships before the opponent, which can be difficult without a strategy. 
 There's background music for an immersive arcade experience! 
