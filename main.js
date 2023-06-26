@@ -174,8 +174,6 @@ const pauseMusicBtn = document.getElementById(`pauseMusic`);
 const audioEl = document.getElementById("backgroundMusic");
 const audioWinEl = document.getElementById(`winningMusic`);
 
-console.log(startBtn, closeBtn)
-
 /*----- event listeners -----*/
 startBtn.addEventListener(`click`, handleCloseMenu);
 closeBtn.addEventListener(`click`, handleCloseMenu);
@@ -520,7 +518,7 @@ function playWinningMusic() {
     audioWinEl.play();
     setTimeout(() => {
         audioWinEl.pause();
-    }, 4400);
+    }, 4600);
 }
 
 function playMusic() {
